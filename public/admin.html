@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FakeAI 管理后台</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="container">
+    <header class="admin-header">
+      <button class="back-btn" id="backBtn" style="display: none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="header-title" id="headerTitle">
+        <div class="logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+            <path d="M4 20a8 8 0 0 1 16 0"/>
+          </svg>
+        </div>
+        <div>
+          <h1>FakeAI 管理后台</h1>
+          <div class="connection-status">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">已连接</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="clearBtn" class="btn btn-secondary">清空</button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="user-list-panel" id="userListPanel">
+        <div class="panel-header">
+          <h2>用户列表</h2>
+          <span class="user-count" id="userCount">0 位用户</span>
+        </div>
+        <div class="user-list" id="userList">
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <p>暂无用户</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-panel" id="chatPanel" style="display: none;">
+        <div class="chat-header">
+          <div class="chat-user-info">
+            <div class="chat-user-avatar" id="chatUserAvatar">U</div>
+            <div>
+              <h2 id="chatUserName">选择用户</h2>
+              <span class="chat-user-status" id="chatUserStatus">离线</span>
+            </div>
+          </div>
+          <span class="message-count" id="messageCount">0 条消息</span>
+        </div>
+
+        <div class="conversation-tabs" id="conversationTabs">
+          <div class="conv-tabs-list" id="convTabsList"></div>
+        </div>
+
+        <div class="messages-container" id="messagesContainer">
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <p>选择一位用户开始对话</p>
+          </div>
+        </div>
+
+        <div class="reply-area">
+          <div class="quick-replies">
+            <span class="quick-label">快捷回复：</span>
+            <button class="quick-btn" data-text="你好！有什么可以帮你的吗？">你好</button>
+            <button class="quick-btn" data-text="好的，我明白了。">好的</button>
+            <button class="quick-btn" data-text="请稍等，我正在为你查询。">请稍等</button>
+            <button class="quick-btn" data-text="感谢你的咨询，祝你生活愉快！">结束语</button>
+          </div>
+          <div class="input-row">
+            <button id="imageBtn" class="btn btn-secondary image-btn" title="发送图片">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </button>
+            <input type="file" id="adminImageInput" accept="image/*" style="display: none;">
+            <textarea
+              id="replyInput"
+              placeholder="输入回复内容，按 Enter 发送，Shift + Enter 换行..."
+              rows="3"
+            ></textarea>
+            <button id="replyBtn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+              发送
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="info-panel" id="infoPanel">
+        <div class="info-card">
+          <h3>使用说明</h3>
+          <ul>
+            <li>左侧列表显示所有用户</li>
+            <li>点击用户查看对话并回复</li>
+            <li>每个用户的对话独立保存</li>
+            <li>支持快捷回复，点击快速填充</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>访问地址</h3>
+          <div class="address-item">
+            <span class="label">手机端：</span>
+            <code id="mobileUrl">-</code>
+            <button class="copy-btn" onclick="copyUrl('mobileUrl')">复制</button>
+          </div>
+          <div class="address-item">
+            <span class="label">管理端：</span>
+            <code id="adminUrl">-</code>
+            <button class="copy-btn" onclick="copyUrl('adminUrl')">复制</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

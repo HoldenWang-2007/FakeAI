@@ -8,6 +8,8 @@
 
 一个模拟 ChatGPT 风格的假 AI 聊天应用，支持后台人工回复和 AI 自动回复两种模式。
 
+> **关于人类与 AI 的思考**：在 AI 越来越像人的时代，我们或许也需要偶尔"扮演"一下 AI。这个项目不仅是一个工具，更是一次小小的实验——当屏幕另一端的回复可能来自人类，也可能来自 AI 时，你还能分辨吗？当人与人之间的交流需要通过"AI"这个中介来完成时，我们对"真实"的定义又是什么？FakeAI 想探讨的正是这种模糊的边界。
+
 ### 功能特性
 
 #### 客户端（用户端）
@@ -120,6 +122,8 @@ MIT
 ## English
 
 A simulated ChatGPT-style fake AI chat application that supports both manual admin replies and AI auto-reply modes.
+
+> **Reflection on Humans & AI**: In an age where AI increasingly resembles humans, perhaps we too occasionally need to "play" AI. This project is more than a tool—it's a small experiment: when replies from the other side of the screen could come from either a human or an AI, can you still tell the difference? When human communication must pass through the intermediary of "AI," what does "real" even mean anymore? FakeAI explores this blurred boundary.
 
 ### Features
 
